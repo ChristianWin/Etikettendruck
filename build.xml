@@ -1,0 +1,101 @@
+<!--         
+
+  Build.xml for Reko 3 in conjuction with MoWare Plugin for MPS 3.x
+  Christine Schilcher, Summer 2014
+  mpreis industries
+  
+  Set JDK and ant home correctly, assume both are installed 
+  in javaexe home directory.
+  
+  set JAVA_HOME=c:\javaexe\MPS30\jre
+  set PATH=%PATH%;c:\javaexe\ant_MPS25\bin;c:\PROGRA~2\WIXTOO~1.7\bin
+  
+-->
+ 
+<project name="BuildMowareApp" default="default" xmlns:fx="javafx:com.sun.javafx.tools.ant">    
+  <taskdef resource="com/sun/javafx/tools/ant/antlib.xml"      
+        uri="javafx:com.sun.javafx.tools.ant"
+        classpath="C:\javaexe\MPS30\jre\lib\ant-javafx.jar"/>
+        
+ <echo>
+    Run by     : ${user.name}
+    Java Home  : ${java.home}
+ </echo>
+
+  <!-- ************************************************************************************************** -->
+  <!-- **** project specific definitions **************************************************************** -->
+  <!-- ************************************************************************************************** -->
+  
+  <property name="versionString" value="ItlEtikett_MPS30" />
+  <property name="destFile" value="edmi.jar" />
+  <property name="appName" value="Etikettendruck" />
+  <property name="appClasses" value="C:/javaware35/edmi/solutions/at.hafina.edmi/classes_gen" />
+  <property name="mainClass" value="at.hafina.edmi.app.Etikettendruck" />    
+  <property name="destImagePath" value="C:/javaware35/edmi/image" />
+
+  <!-- ************************************************************************************************** -->
+  <!-- ************************************************************************************************** -->
+  
+  
+  <property name="mowarePluginDir" value="C:/javaexe/MPS30/config/plugins/moware" />
+  <property name="mpsHomeDir" value="c:/javaexe/MPS30" />
+  <property name="runtimeJars" value="${mowarePluginDir}/jars/" />
+  
+  
+  
+  <target name="default">
+    <delete includeEmptyDirs="true">
+      <fileset dir="${destImagePath}" includes="**/*" defaultexcludes="no"/>
+    </delete> 
+    
+    
+   	<fx:resources id="appResources">
+        <fx:fileset dir="C:/javaware35/edmi/jars/" includes="*.jar" />
+         
+        <fx:fileset dir="${mpsHomeDir}/lib/" includes="commons-lang-2.4.jar" />
+        <fx:fileset dir="${mpsHomeDir}/lib/" includes="mps-collections.jar" />
+        <fx:fileset dir="${mpsHomeDir}/lib/" includes="mps-closures.jar" />
+        <fx:fileset dir="${runtimeJars}" includes="*.jar" />
+        <fx:fileset dir="${runtimeJars}/printing" includes="*.jar" />
+        <fx:fileset dir="${runtimeJars}/mail" includes="*.jar"/>
+        <fx:fileset dir="${runtimeJars}/zoo" includes="*.jar" />
+        
+        <fx:fileset dir="${mowarePluginDir}/languages/MoWareLangAndSolutions/" includes="org.modellwerkstatt.sandbox.jar" />
+        <fx:fileset dir="${mowarePluginDir}/languages/MoWareLangAndSolutions/" includes="org.modellwerkstatt.manmap.solution.jar" />
+        <fx:fileset dir="${mowarePluginDir}/languages/MoWareLangAndSolutions/" includes="org.modellwerkstatt.forms.sandbox.jar" />
+        <fx:fileset dir="${mowarePluginDir}/languages/MoWareLangAndSolutions/" includes="org.modellwerkstatt.fxforms.runtime.jar" />
+        
+        
+        
+        <fx:fileset dir="${destImagePath}" includes="${destFile}" />
+		</fx:resources> 
+    
+    <fx:jar destfile="${destImagePath}/${destFile}">
+      <fx:application id="fxApplication" name="${appName}" mainClass="${mainClass}" toolkit="fx"/>
+      
+      <fileset dir="${appClasses}" />
+      <fx:resources refId="appResources" />
+      
+      <manifest>
+				<attribute name="Implementation-Vendor" value="modellwerkstatt.org"/>
+				<attribute name="Implementation-Title" value="preis.at"/>
+				<attribute name="Implementation-Version" value="3.x.x"/>
+				<attribute name="JavaFX-Feature-Proxy" value="None"/>
+			</manifest>
+      
+    </fx:jar> 
+    
+ 
+    <fx:deploy width="800" height="600" nativeBundles="all" verbose="true"
+               embedJNLP="false" extension="false" includeDT="false" offlineAllowed="true"
+               outdir="${destImagePath}" outfile="myApp">
+      
+      <fx:application refId="fxApplication"/>
+      <fx:preferences install="true"/>
+
+      <fx:resources refId="appResources" />
+      
+      <fx:info title="${appName}" vendor="${versionString}"/>
+    </fx:deploy>          
+  </target>
+</project>
