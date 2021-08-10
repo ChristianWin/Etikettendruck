@@ -4,16 +4,16 @@
     <modelRoot contentPath="${module}" type="default">
       <sourceRoot location="models" />
     </modelRoot>
-    <modelRoot contentPath="C:/javaware35/edmi/jars" type="java_classes">
+    <modelRoot contentPath="C:/javaware30/edmi/jars" type="java_classes">
       <sourceRoot location="JTFORMer75.jar" />
     </modelRoot>
-    <modelRoot contentPath="C:/javaware35/edmi/jars" type="java_classes">
+    <modelRoot contentPath="C:/javaware30/edmi/jars" type="java_classes">
       <sourceRoot location="template.jar" />
     </modelRoot>
   </models>
   <stubModelEntries>
-    <stubModelEntry path="C:/javaware35/edmi/jars/JTFORMer75.jar" />
-    <stubModelEntry path="C:/javaware35/edmi/jars/template.jar" />
+    <stubModelEntry path="C:/javaware30/edmi/jars/JTFORMer75.jar" />
+    <stubModelEntry path="C:/javaware30/edmi/jars/template.jar" />
   </stubModelEntries>
   <sourcePath />
   <dependencies>

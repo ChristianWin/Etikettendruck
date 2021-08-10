@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\TEC-IT\TFORMer7\Bin\TFPrint.exe" "\\mpreis.co.at\servicecenter\groups\Mitalia-Etikettierung\Fixtextvorlagen\<FormFile>.tff" -O "ETI_PRINT_G" -SDK Media=A4 noDuplex Collate=1 Copies=2 SimulateCopies=1

@@ -47,7 +47,7 @@
     <delete includeEmptyDirs="true">
       <fileset dir="${destImagePath}" includes="**/*" defaultexcludes="no"/>
     </delete> 
-    
+    <copy file="C:/Program Files (x86)/TEC-IT/TFORMer7/Bin/TFORMer75JNIx64.dll" todir="${destImagePath}"/>
     
    	<fx:resources id="appResources">
         <fx:fileset dir="C:/javaware35/edmi/jars/" includes="*.jar" />
@@ -68,6 +68,7 @@
         
         
         <fx:fileset dir="${destImagePath}" includes="${destFile}" />
+        <fx:fileset dir="${destImagePath}" includes="TFORMer75JNIx64.dll" />
 		</fx:resources> 
     
     <fx:jar destfile="${destImagePath}/${destFile}">
@@ -96,6 +97,9 @@
       <fx:resources refId="appResources" />
       
       <fx:info title="${appName}" vendor="${versionString}"/>
-    </fx:deploy>          
+    </fx:deploy>  
+ <!--      
+    <copy file="C:/Program Files (x86)/TEC-IT/TFORMer7/Bin/TFORMer75JNIx64.dll" todir="${destImagePath}/bundles/Etikettendruck/app"/>
+-->
   </target>
 </project>
